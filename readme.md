@@ -33,6 +33,9 @@ React 框架的核心概念、组件模型和最佳实践。
 常见编程场景的实现示例。
 
 - [带重试机制的 fetch 函数](code/fetchWithReTry.js) - 实现一个具有自动重试功能的网络请求函数
+- [事件总线实现](code/eventBus.js) - 实现一个简单的事件总线，支持事件的订阅与发布
+- [版本号比较函数](code/compareVersion.js) - 实现一个比较两个版本号大小的函数
+- [IntersectionObserver封装示例](js/IntersectionObserver.js) - 展示如何使用IntersectionObserver API
 
 ## 使用方法
 
