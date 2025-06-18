@@ -29,3 +29,32 @@ const rangeMonthFn_V2 = (time1, time2) => {
 // 测试
 rangeMonthFn_V2('2017-8', '2019-6');
 // 输出: ["2017-09", "2017-10", "2017-11", "2017-12", "2018-01", ..., "2019-05"]
+
+//另一种思路
+// 我们不把日期看作是（年，月）的二维坐标，而是将其转换为一个从某个基准点（比如公元0年0月）开始计算的总月份数。这样一来，问题就从处理复杂的日期进位，变成了简单的一维数字遍历。
+const rangeMonthFn_byTotalMonths = (time1, time2) => {
+    const [startY, startM] = time1.split('-').map(Number);
+    const [endY, endM] = time2.split('-').map(Number);
+    // 转换为总月份（这里 month 从 1 开始，为了计算方便可以先减 1）
+    const toTotalMonths = (y, m) => y * 12 + (m - 1);
+
+    // 从总月份转换回 [year, month]
+    const fromTotalMonths = (total) => {
+        const year = Math.floor(total / 12);
+        const month = (total % 12) + 1;
+        return [year, month];
+    };
+    const startTotal = toTotalMonths(startY, startM);
+    const endTotal = toTotalMonths(endY, endM);
+
+    if (startTotal >= endTotal -1) {
+        return []; // 没有中间月份
+    }
+    const rangeMonth = [];
+    for (let i = startTotal + 1; i < endTotal; i++) {
+        const [year, month] = fromTotalMonths(i);
+        rangeMonth.push(`${year}-${String(month).padStart(2, '0')}`);
+    }
+    console.log('rangeMonth_byTotalMonths', rangeMonth);
+    return rangeMonth;
+}
