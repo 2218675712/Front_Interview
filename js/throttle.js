@@ -1,11 +1,12 @@
 const throttleFn = (fn, waitTime = 1000) => {
     let time = null
-    return function () {
+    return function (...args) {
         if (time) {
            return
         }
         time = setTimeout(() => {
-            fn.apply(this, arguments)
+            console.log('args',args)
+            fn.apply(this, args)
 
             time = null
 
@@ -16,4 +17,4 @@ const throttleFn = (fn, waitTime = 1000) => {
 const newFn = throttleFn(() => {
     console.log('123', 123)
 }, 3000)
-newFn()
+newFn('336699')
